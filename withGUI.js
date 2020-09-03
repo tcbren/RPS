@@ -16,11 +16,11 @@ function getPlayerChoice() {
 
     //Iterate through buttons, run playRound() with button selection
     buttons.forEach((button) => {
-        //Click listener for each button
+        //Click-listener for each button
         button.addEventListener('click', () => {
-            //playRound(button.id, computerPlay());
-            
-            return button.id;
+            //game(button.id);
+            playRound(button.id, computerPlay());
+            //return button.id;
         });
     });
 }
@@ -30,20 +30,45 @@ function playRound(playerSelection, computerSelection) {
     console.log(`User: ${playerSelection}`);
     console.log(`PC: ${computerSelection}`);
     if ((playerSelection === "paper" && computerSelection === "rock") || (playerSelection === "scissors" && computerSelection === "paper") || (playerSelection === "rock" && computerSelection === "scissors")) {
-        return 1;
+        //return 1;
+        console.log("You won");
+        playerScore++;
+        
     } else if (playerSelection === computerSelection) {
-        return undefined;
+        //return undefined;        
+        console.log("You tied");
     } else {
-        return 2;
+        //return 2;
+        console.log("You lost");
+        computerScore++;        
+    }
+    console.log(`Your score is: ${playerScore}\nThe PC score is: ${computerScore}`);
+    checkScore();
+}
+
+function checkScore() {
+    if (playerScore === 3) {
+        console.log("You have bested the computer and have WON the match!");
+        playerScore = 0;
+        computerScore = 0;
+    } else if (computerScore === 3) {
+        console.log("You are a disgrace to the human race. The computer has defeated you and you have LOST the match!");
+        playerScore = 0;
+        computerScore = 0;
     }
 }
+//variables to track match score
+let playerScore = 0;
+let computerScore = 0;
+
 //Create function called game() to play 5 round game. Best 3/5 wins.
-function game(playerChoice) {
+function game() {
     let playerScore = 0;
     let computerScore = 0;
     let winOrLose;
+    
     while (playerScore < 3 && computerScore < 3) {
-        winOrLose = playRound(playerChoice, computerPlay());
+        winOrLose = playRound(getPlayerChoice(), computerPlay());
         if (winOrLose === 1) {
             console.log("You win this round, Gadget!");
             playerScore++;
@@ -60,8 +85,9 @@ function game(playerChoice) {
     return playerScore;
 }
 //Use console.log to display winner of match
-if (game(getPlayerChoice()) === 3) {
+/*if (game() === 3) {
     console.log("You have bested the computer and have WON the match!");
 } else {
     console.log("You are a disgrace to the human race. The computer has defeated you and you have LOST the match!");
-}
+}*/
+getPlayerChoice();
