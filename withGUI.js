@@ -22,25 +22,19 @@ function getPlayerChoice() {
 
 //Create function playRound, takes 2 parameters (user and pc choices), compares choices, returns string to declare winner
 function playRound(playerSelection, computerSelection) {
-    //console.log(`User: ${playerSelection}`);
-    //console.log(`PC: ${computerSelection}`);
     let winLoss;
     msg.textContent = "";
     if ((playerSelection === "paper" && computerSelection === "rock") || (playerSelection === "scissors" && computerSelection === "paper") || (playerSelection === "rock" && computerSelection === "scissors")) {
-        console.log("You won");
         winLoss = 1;
         playerScore++;       
     } else if (playerSelection === computerSelection) {
-        console.log("You tied");
         winLoss = 0;
     } else {
-        console.log("You lost");
         winLoss = 2;
         computerScore++;        
     }
     printRoundResults(playerSelection, computerSelection, winLoss);
     updateScore();
-    //console.log(`Your score is: ${playerScore}\nThe PC score is: ${computerScore}`);
     checkScore();
 }
 const userScoreDisplay = document.querySelector('#me');
@@ -64,13 +58,9 @@ function updateScore() {
 function checkScore() {
     if (playerScore === 3) {
         msg.textContent = `You have bested the computer by a score of ${playerScore} games to ${computerScore} and have WON the match!`;
-        //playerScore = 0;
-        //computerScore = 0;
         reset();
     } else if (computerScore === 3) {
         msg.textContent = `You are a disgrace to the human race.\nThe computer has defeated you by a score of ${computerScore} games to ${playerScore} and you have LOST the match!`;
-        //playerScore = 0;
-        //computerScore = 0;
         reset();
     }
 }
@@ -109,6 +99,5 @@ function printRoundResults(user, pc, result) {
         roundResults.textContent = "It is a draw! No points awarded!";
     }
 }
-
 
 getPlayerChoice();
